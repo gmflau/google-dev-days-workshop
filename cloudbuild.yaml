@@ -63,8 +63,6 @@ steps:
       gcloud container clusters get-credentials ${_GKE_CLUSTER} \
         --project $PROJECT_ID \
         --zone ${_GKE_ZONE}
-      # Clean up prior deployment if any
-      kubectl delete -f ./k8s -n default
       # Deploy the App
       kubectl apply -f ./k8s -n default
 

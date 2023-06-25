@@ -90,17 +90,38 @@ Wait for about ~10 minutes and run the command below to verify ASM is enabled:
 ```bash
 gcloud container fleet mesh describe --project $PROJECT_ID
 ```
+You should see the following states equal to `ACTIVE`  when the installation of Anthos Service Mesh has been completed:
+```bash
+membershipStates:
+  projects/319143195410/locations/us-central1/memberships/redis-gke-cluster-us-central1-membership:
+    servicemesh:
+      controlPlaneManagement:
+        details:
+        - code: REVISION_READY
+          details: 'Ready: asm-managed'
+        state: ACTIVE
+      dataPlaneManagement:
+        details:
+        - code: OK
+          details: Service is running.
+        state: ACTIVE
+```
 Enable "default" namespace for sidecar injection
 ```bash
 kubectl label namespace default istio-injection=enabled istio.io/rev-
 ```
-
-     
+You should see the following output on success:
+```bash
+label "istio.io/rev" not found.
+namespace/default labeled
+```
+    
+       
 #### Lab 3: Create a Redis Enterprise Cloud subscription on Google Cloud
 TBD
 Collect db endpoint, password
 
-    
+     
 #### Lab 4: Create a Google Cloud Build Trigger and Deploy the Sample App
 Create Cloud Build Trigger:
 ```bash
@@ -123,7 +144,7 @@ gcloud alpha builds triggers create cloud-source-repositories \
 ```
 Run the trigger to deploy the sample app:
 ```bash
-gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master
+gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master --region=$CLUSTER_LOCATION
 ```
 
 #### Lab 5: Set up Redis Data Integration (RDI)
