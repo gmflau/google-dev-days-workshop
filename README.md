@@ -2,7 +2,7 @@
 
     
 #### Lab 0: Open a Google Cloud Shell and Enable APIs
-[![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/){:target="_blank"}
+[![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
     
     
 #### Lab 1: Create a Cloud Source repo for the workshop sample app
