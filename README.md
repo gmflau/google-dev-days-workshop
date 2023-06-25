@@ -2,10 +2,11 @@
 
     
 #### Lab 0: Open a Google Cloud Shell and Enable APIs
-[![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
+[![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/){:target="_blank"}
     
     
 #### Lab 1: Create a Cloud Source repo for the workshop sample app
+Create a new Cloud Source repo:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 export REDIS_REPO="redis-repo-$(date +'%Y%m%d%H%M%S')"
