@@ -33,6 +33,7 @@ Part 1: Development and Deployment Labs - Part I
 * [Lab 2:](./lab2/) Create Google Cloud Infrastrcuture Components
 * [Lab 3:](./lab3/) Create a Redis Enterprise Cloud subscription on Google Cloud
 * Break [15 minutes]
+    
 Part 2: Development and Deployment Labs - Part II
 * [Lab 4:](./lab4/) Create a Google Cloud Build Trigger and Deploy the Sample App
 * [Lab 5:](./lab5/) Set up Redis Data Integration (RDI)
