@@ -34,8 +34,8 @@ Top three key takeaways:
           
 #### Lab 0: Open a Google Cloud Shell and Enable APIs
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
-    
-    
+![Google Cloud Shell](./img/GCP_Cloud_Shell_Screen.png)    
+       
 #### Lab 1: Create a Cloud Source repo for the workshop sample app
 Set your GCP Project:
 ```bash
@@ -60,7 +60,7 @@ git add .
 git commit -m "Initial commit"
 git push -u origin master
 ```
-
+![Cloud Sources Repo](./img/Cloud_Sources_Repo.png)
        
 #### Lab 2: Create Google Cloud Infrastrcuture Components
 Create a VPC:
