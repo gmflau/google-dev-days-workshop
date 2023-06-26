@@ -1,6 +1,32 @@
-# google-dev-days-workshop
+# DevDay Workshop: Build Better, Faster Applications – Faster (google-dev-days-workshop)
 
+#### Workshop Agenda: [~4 hours duration]
+Check-in: 30 mts
+Age of real time: 20 mts
+Modern Application Architectures: 30 mts
+Development and Deployment Labs - Part I: 45 mts
+Break: 15 mts
+Development and Deployment Labs - Part II: 45 mts
+Next Gen AI powered applications - How Gen AI + Redis VSS can work together: 30 mts
+Event closing: 15 mts
     
+Top three key takeaways:    
+* How to build cloud native applications using the latest capabilities of Google Cloud and Redis Enterprise
+* The latest and greatest features of real-time applications
+* How the combination of Gen AI and Redis as a Vector database can help you build Gen AI powered applications
+         
+
+#### Lab Agenda:
+* Lab 0
+* Lab 1
+* Lab 2
+* Lab 3
+* Break [15 minutes]
+* Lab 4
+* Lab 5
+* Lab 6
+     
+          
 #### Lab 0: Open a Google Cloud Shell and Enable APIs
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
     
