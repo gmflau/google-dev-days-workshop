@@ -118,10 +118,23 @@ namespace/default labeled
     
        
 #### Lab 3: Create a Redis Enterprise Cloud subscription on Google Cloud
-TBD
-Collect db endpoint, password
+Create a Redis Cloud subscription:    
+* Follow this [link](https://docs.redis.com/latest/rc/rc-quickstart/#create-an-account) through step 6. 
+* In step 4, choose Google Cloud. Then come back here to continue on section 3 below to initialize two environments for this workshop.
+* Collect the Redis Enterprise database connection string:
+![SM Connect 01](./img/SM_Connect_01.png)    
+![SM Connect 02](./img/SM_Connect_02.png)    
+Back in your Google Cloud shell and set the following environment variable:
+```bash
+export REDIS_URI=<Redis connection string from the previous step>
+export REDIS_INSIGHT_PORT=<Redis Enterprise databaase port number>
 
-     
+For example,
+export REDIS_URI=redis://default:xnurcS28JREs9S8HHemx2cKc1jLFi3ua@redis-10996.c279.us-central1-1.gce.cloud.redislabs.com:10996
+export REDIS_INSIGHT_PORT=10996 
+```
+    
+       
 #### Lab 4: Create a Google Cloud Build Trigger and Deploy the Sample App
 Create Cloud Build Trigger:
 ```bash
@@ -130,8 +143,6 @@ export CLUSTER_LOCATION=us-central1
 export CLUSTER_NAME="redis-gke-cluster-$CLUSTER_LOCATION"
 export REDIS_API_GATEWAY_IP="$(gcloud compute addresses describe redis-api-gateway-ip --region=us-central1 --format='value(address)')"
 export REDIS_CLIENT_HOST_IP="$(gcloud compute addresses describe redis-client-host-ip --region=us-central1 --format='value(address)')"
-export REDIS_URI=redis://default:xnurcS28JREs9S8HHemx2cKc1jLFi3ua@redis-10996.c279.us-central1-1.gce.cloud.redislabs.com:10996
-export REDIS_INSIGHT_PORT=10996
 export REDIS_CLOUD_BUILD_TRIGGER="redis-cb-trigger"
 
 gcloud alpha builds triggers create cloud-source-repositories \
