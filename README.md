@@ -28,7 +28,7 @@ These hands-on labs are very intense from technical experience standpoint. These
      
 #### Lab Agenda:
 Part 1: Development and Deployment Labs - Part I
-* Lab 0: Open a Google Cloud Shell and Enable APIs
+* [Lab 0:](./lab0/) Open a Google Cloud Shell and Enable APIs
 * Lab 1: Create a Cloud Source repo for the workshop sample app
 * Lab 2: Create Google Cloud Infrastrcuture Components
 * Lab 3: Create a Redis Enterprise Cloud subscription on Google Cloud
