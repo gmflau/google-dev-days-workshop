@@ -2,8 +2,8 @@
 
 #### Workshop Agenda: [~4 hours duration]
 <!-- BEGIN_AGENDA -->
-| Section | Time |
-|---------|------|
+| Section    | Time    |
+|------------|---------|
 | Check-in | 30 minutes |
 | Age of real time | 20 minutes |
 | Modern Application Architecture | 30 minutes |
