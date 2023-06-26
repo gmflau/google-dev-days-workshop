@@ -1,6 +1,7 @@
 # Build Better, Faster Applications – Faster Workshop (google-dev-days-workshop)
 
 #### Workshop Agenda: [~4 hours duration]
+<!-- BEGIN_AGENDA -->
 |------|-------------|
 | Check-in | 30 minutes |
 | Age of real time | 20 minutes |
@@ -10,7 +11,9 @@
 | Development and Deployment Labs - Part II | 45 minutes |
 | Next Gen AI powered applications - How Gen AI + Redis VSS can work together | 30 minutes |
 | Event closing | 15 minutes |
+<!-- BEGIN_AGENDA -->
        
+     
 Top three key takeaways:    
 * How to build cloud native applications using the latest capabilities of Google Cloud and Redis Enterprise
 * The latest and greatest features of real-time applications
