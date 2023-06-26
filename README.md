@@ -10,8 +10,7 @@
 | Development and Deployment Labs - Part I | 45 minutes |
 | Break | 15 minutes |
 | Development and Deployment Labs - Part II | 45 minutes |
-| Next Gen AI powered applications | 30 minutes |
-| Next Gen AI powered applications - How Gen AI + Redis VSS can work together | 30 minutes |
+| Gen AI powered applications | 30 minutes |
 | Event closing | 15 minutes |
 <!-- END_AGENDA -->
        
@@ -41,7 +40,7 @@ Part 2: Development and Deployment Labs - Part II
 * [Lab 7:](./lab7/) Re-deploy the sample app with new CloudSQL PostgreSQL backend along with RDI
 * [Lab 8:](./lab8/) Microservices Observability Walkthrough
     
-Part 3: Next Gen AI powered applications - How Gen AI + Redis VSS can work together
+Part 3: Gen AI powered applications - How Gen AI + Redis VSS can work together
 * [Lab 9:](./lab9/qa_vertex_redis.ipynb) Document Question Answering with Langchain, VertexAI and Redis
       
 
