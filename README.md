@@ -1,4 +1,4 @@
-# DevDay Workshop: Build Better, Faster Applications – Faster (google-dev-days-workshop)
+# Build Better, Faster Applications – Faster Workshop (google-dev-days-workshop)
 
 #### Workshop Agenda: [~4 hours duration]
 Check-in: 30 mts
