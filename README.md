@@ -29,26 +29,26 @@ These hands-on labs are very intense from technical experience standpoint. These
 #### Lab Agenda:
 Part 1: Development and Deployment Labs - Part I
 * [Lab 0:](./lab0/) Open a Google Cloud Shell and Enable APIs
-* Lab 1: Create a Cloud Source repo for the workshop sample app
-* Lab 2: Create Google Cloud Infrastrcuture Components
-* Lab 3: Create a Redis Enterprise Cloud subscription on Google Cloud
+* [Lab 1:](./lab1/) Create a Cloud Source repo for the workshop sample app
+* [Lab 2:](./lab2/) Create Google Cloud Infrastrcuture Components
+* [Lab 3:](./lab3/) Create a Redis Enterprise Cloud subscription on Google Cloud
 * Break [15 minutes]
 Part 2: Development and Deployment Labs - Part II
-* Lab 4: Create a Google Cloud Build Trigger and Deploy the Sample App
-* Lab 5: Set up Redis Data Integration (RDI)
-* Lab 6: Update the Google Cloud Trigger with new CloudSQL PostgreSQL connection
-* Lab 7: Re-deploy the sample app with new CloudSQL PostgreSQL backend along with RDI
-* Lab 8: Microservices Observability Walkthrough
+* [Lab 4:](./lab4/) Create a Google Cloud Build Trigger and Deploy the Sample App
+* [Lab 5:](./lab5/) Set up Redis Data Integration (RDI)
+* [Lab 6:](./lab6/) Update the Google Cloud Trigger with new CloudSQL PostgreSQL connection
+* [Lab 7:](./lab7/) Re-deploy the sample app with new CloudSQL PostgreSQL backend along with RDI
+* [Lab 8:](./lab8/) Microservices Observability Walkthrough
     
 Part 3: Next Gen AI powered applications - How Gen AI + Redis VSS can work together
-* Lab 9: Document Question Answering with Langchain, VertexAI and Redis
+* [Lab 9:](./lab9/) Document Question Answering with Langchain, VertexAI and Redis
      
     
-#### [Lab 0:](./lab0/) Open a Google Cloud Shell and Enable APIs
+#### Lab 0: Open a Google Cloud Shell and Enable APIs
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
 ![Google Cloud Shell](./img/GCP_Cloud_Shell_Screen.png)    
        
-#### [Lab 1:](./lab1/) Create a Cloud Source repo for the workshop sample app
+#### Lab 1: Create a Cloud Source repo for the workshop sample app
 Set your GCP Project:
 ```bash
 gcloud config set project <PROJECT_ID>
