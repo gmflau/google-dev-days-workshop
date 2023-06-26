@@ -42,7 +42,7 @@ Part 2: Development and Deployment Labs - Part II
 * [Lab 8:](./lab8/) Microservices Observability Walkthrough
     
 Part 3: Next Gen AI powered applications - How Gen AI + Redis VSS can work together
-* [Lab 9:](./lab9/) Document Question Answering with Langchain, VertexAI and Redis
+* [Lab 9:](./lab9/qa_vertex_redis.ipynb) Document Question Answering with Langchain, VertexAI and Redis
       
 
      
