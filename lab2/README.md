@@ -24,7 +24,7 @@ export REDIS_CLIENT_HOST_IP="$(gcloud compute addresses describe redis-client-ho
 
 On success, you should see the newly created reserved public IP addresses as shown below:
 
-
+    
 Create a GKE cluster:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
@@ -44,8 +44,8 @@ gcloud container clusters create $CLUSTER_NAME \
 ```
 
 On success, you should see your newly created GKE cluster like below:
-
-
+![GKE](./img/GKE_Cluster.png)
+         
 Provision Anthos Service Mesh:
 Enable Anthos Service Mesh on your project's Fleet:
 ```bash
@@ -58,6 +58,9 @@ gcloud container fleet memberships register $CLUSTER_NAME-membership \
   --enable-workload-identity \
   --project ${PROJECT_ID}
 ```
+On success, you can verify the GKE cluster's fleet membership in Google Cloud Console:
+![ASM Fleet Membership](./img/ASM_Fleet_Membership_Reg.png)
+         
 Provision managed Anthos Service Mesh on the cluster using the Fleet API:
 ```bash
 gcloud container fleet mesh update \
@@ -94,5 +97,26 @@ You should see the following output on success:
 label "istio.io/rev" not found.
 namespace/default labeled
 ```
-
+Verify the auto sidecar injection is enabled by running:
+```bash
+kubectl get ns default -oyaml
+```
+You should see the following output with "istio-injection: enabled" label in the `default` namespace's definition:
+```bash
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2023-06-30T16:21:36Z"
+  labels:
+    istio-injection: enabled
+    kubernetes.io/metadata.name: default
+  name: default
+  resourceVersion: "8107"
+  uid: 383da266-09a6-4fa3-b12c-6e62e62b3d84
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active
+```
 

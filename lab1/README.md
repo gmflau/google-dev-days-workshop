@@ -23,4 +23,5 @@ git add .
 git commit -m "Initial commit"
 git push -u origin master
 ```
+You can confirm the repo has been successfully created in Google Cloud Console:
 ![Cloud Sources Repo](./img/Cloud_Sources_Repo.png)

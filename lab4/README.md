@@ -16,13 +16,14 @@ gcloud alpha builds triggers create cloud-source-repositories \
   --substitutions=_GKE_CLUSTER=$CLUSTER_NAME,_GKE_ZONE=$CLUSTER_LOCATION,_API_GATEWAY_IP=$REDIS_API_GATEWAY_IP,_CLIENT_IP=$REDIS_CLIENT_HOST_IP,_REDIS_URI=$REDIS_URI,_REDIS_INSIGHT_PORT=$REDIS_INSIGHT_PORT \
   --region=$CLUSTER_LOCATION
 ```
+On success, you should see the newly created trigger inside Google Cloud Console:
+![CB Trigger](./img/CB_Trigger.png)
+    
 Run the trigger to deploy the sample app:
 ```bash
 gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master --region=$CLUSTER_LOCATION
 ```
-
-On success, you should see the newly created Cloud Build trigger like below:
-![CB Trigger]()
-
-
-
+    
+On success, you should see a similar build-in-process like below:
+![CB Trigger History](./img/CB_Trigger_Build.png))
+    
