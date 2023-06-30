@@ -1,6 +1,6 @@
 # Build Better, Faster Applications – Faster Workshop (google-dev-days-workshop)
 
-The sample app used in this workshop is a cloud-first microservices demo application that allows a customer to populate a shopping cart with products. The site has a "Buy Now" button to facilitate ordering those products. When first starting out, you might set up and populate a product database (perhaps a SQL database). Then you might write a backend API to handle the processes of creating an order, creating an invoice, processing payments, handling fulfillment, and updating the customer's order history… all in one go.
+The sample app used in this workshop is a cloud-first microservices demo application that allows a customer to populate a shopping cart with products. The site has a "Buy Now" button to facilitate ordering those products. It sets up and populatea product database (perhaps a SQL database). A backend API to handle the processes of creating an order, creating an invoice, processing payments, handling fulfillment, and updating the customer's order history.
 
 Being deployed on Google Kubernetes Engine (GKE) cluster enabled with Anthos Service Mesh, it provides the app with a horizontally scalable infrastructure as the demand grows as well as observabilty of the underlying microservices to identify any bottlenecks or chances to voilate said SLO/SLA. Further to that, it will provide finer-grained security as to how each microservices can be assessed.
 
