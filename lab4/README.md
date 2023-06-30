@@ -31,5 +31,8 @@ You can now access the sample app and make a few purchases by pointing your brow
 ```bash
 https://<$REDIS_CLIENT_HOST_IP>:4200
 ```
+         
+A successful build will look like the following:
+![CB Trigger Build Success](./img/CB_Trigger_Build_Success.png)
 
 
