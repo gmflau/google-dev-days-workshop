@@ -26,4 +26,10 @@ gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master --re
     
 On success, you should see a similar build-in-process like below:
 ![CB Trigger History](./img/CB_Trigger_Build.png))
-    
+
+You can now access the sample app and make a few purchases by pointing your browser at:
+```bash
+https://<$REDIS_CLIENT_HOST_IP>:4200
+```
+
+
