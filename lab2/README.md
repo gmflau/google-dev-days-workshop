@@ -119,4 +119,55 @@ spec:
 status:
   phase: Active
 ```
+    
+Create the Source DB - Cloud SQL for PostgreSQL:
+Note: **database-flags=cloudsql.logical_decoding=on** enables logical replication workflows and change data capture (CDC) workflows which is required by RDI.
+Create PostgreSQL instance:
+```
+export ZONE=us-central1-a
+export POSTGRESQL_INSTANCE=redis-postgresql-instance
+
+gcloud sql instances create $POSTGRESQL_INSTANCE \
+--database-version=POSTGRES_14 \
+--cpu=2 \
+--memory=8GiB \
+--zone=$ZONE \
+--authorized-networks=0.0.0.0/0 \
+--root-password=postgres \
+--database-flags=cloudsql.logical_decoding=on
+```
+
+Create two sql batch files:
+```bash
+cat <<EOF > alter_postgres_replication.sql
+alter user postgres with replication;
+EOF
+```
+cat <<EOF > sql_batch_file.sql
+CREATE TABLE emp (
+	user_id serial PRIMARY KEY,
+	fname VARCHAR ( 50 ) NOT NULL,
+	lname VARCHAR ( 50 ) NOT NULL
+);
+insert into emp (fname, lname) values ('Gilbert', 'Lau');
+insert into emp (fname, lname) values ('Robert', 'Lau');
+insert into emp (fname, lname) values ('Kai Chung', 'Lau');
+insert into emp (fname, lname) values ('Albert', 'Lau');
+insert into emp (fname, lname) values ('Abraham', 'Lau');
+insert into emp (fname, lname) values ('May', 'Wong');
+insert into emp (fname, lname) values ('Henry', 'Ip');
+EOF
+```
+              
+By default, PostgreSQL database superuser (postgres) does not have permission to create a replication slot which is required by RDI.  Run the following commands to grant the permission:  
+```
+gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < alter_postgres_replication.sql
+```
+When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return
+Run the following command to populate test data:
+```
+gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql
+```
+When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return
+
 
