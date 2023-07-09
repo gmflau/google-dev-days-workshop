@@ -123,7 +123,7 @@ status:
 Create the Source DB - Cloud SQL for PostgreSQL:
 Note: **database-flags=cloudsql.logical_decoding=on** enables logical replication workflows and change data capture (CDC) workflows which is required by RDI.
 Create PostgreSQL instance:
-```
+```bash
 export ZONE=us-central1-a
 export POSTGRESQL_INSTANCE=redis-postgresql-instance
 
@@ -143,6 +143,7 @@ cat <<EOF > alter_postgres_replication.sql
 alter user postgres with replication;
 EOF
 ```
+```bash
 cat <<EOF > sql_batch_file.sql
 CREATE TABLE emp (
 	user_id serial PRIMARY KEY,
