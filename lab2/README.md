@@ -46,7 +46,7 @@ gcloud container clusters create $CLUSTER_NAME \
 On success, you should see your newly created GKE cluster like below:
 ![GKE](./img/GKE_Cluster.png)
          
-Provision Anthos Service Mesh:
+Provision Anthos Service Mesh:    
 Enable Anthos Service Mesh on your project's Fleet:
 ```bash
 gcloud container fleet mesh enable --project $PROJECT_ID
@@ -93,7 +93,7 @@ Enable "default" namespace for sidecar injection
 kubectl label namespace default istio-injection=enabled istio.io/rev-
 ```
 You should see the following output on success:
-```bash
+```
 label "istio.io/rev" not found.
 namespace/default labeled
 ```
@@ -102,7 +102,7 @@ Verify the auto sidecar injection is enabled by running:
 kubectl get ns default -oyaml
 ```
 You should see the following output with "istio-injection: enabled" label in the `default` namespace's definition:
-```bash
+```
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -120,9 +120,9 @@ status:
   phase: Active
 ```
     
-Create the Source DB - Cloud SQL for PostgreSQL:
-Note: **database-flags=cloudsql.logical_decoding=on** enables logical replication workflows and change data capture (CDC) workflows which is required by RDI.
-Create PostgreSQL instance:
+Create the Source DB - Cloud SQL for PostgreSQL:    
+Note: **database-flags=cloudsql.logical_decoding=on** enables logical replication workflows and change data capture (CDC) workflows which is required by RDI.     
+Create PostgreSQL instance:   
 ```bash
 export ZONE=us-central1-a
 export POSTGRESQL_INSTANCE=redis-postgresql-instance
@@ -151,12 +151,12 @@ CREATE TABLE emp (
 	lname VARCHAR ( 50 ) NOT NULL
 );
 insert into emp (fname, lname) values ('Gilbert', 'Lau');
-insert into emp (fname, lname) values ('Robert', 'Lau');
-insert into emp (fname, lname) values ('Kai Chung', 'Lau');
-insert into emp (fname, lname) values ('Albert', 'Lau');
-insert into emp (fname, lname) values ('Abraham', 'Lau');
-insert into emp (fname, lname) values ('May', 'Wong');
-insert into emp (fname, lname) values ('Henry', 'Ip');
+insert into emp (fname, lname) values ('Pete', 'Sampras');
+insert into emp (fname, lname) values ('Roger', 'Federer');
+insert into emp (fname, lname) values ('Novak', 'Djokovic');
+insert into emp (fname, lname) values ('Tiger', 'Woods');
+insert into emp (fname, lname) values ('Freddie', 'Mercury');
+insert into emp (fname, lname) values ('Michael', 'Jordan');
 EOF
 ```
               
