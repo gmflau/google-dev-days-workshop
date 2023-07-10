@@ -36,7 +36,13 @@ kubectl exec -it rec-0 -n redis -- curl -s https://redismodules.s3.amazonaws.com
 
 kubectl exec -it rec-0 -n redis -- curl -k -s -u "demo@redis.com:${REC_PWD}" -F "module=@/tmp/redis-gears.zip" https://localhost:9443/v2/modules
 ```
-    
+On success, you should see similar output below:
+```
+Defaulted container "redis-enterprise-node" out of: redis-enterprise-node, bootstrapper
+Defaulted container "redis-enterprise-node" out of: redis-enterprise-node, bootstrapper
+{"action_uid":"e0a88d27-4c52-4e9e-b1f1-6095baa4d184","author":"RedisLabs","capabilities":["types","crdb","failover_migrate","persistence_aof","persistence_rdb","clustering","backup_restore","reshard_rebalance","eviction_expiry","intershard_tls","intershard_tls_pass","ipv6"],"command_line_args":"Plugin gears_python CreateVenv 1","config_command":"RG.CONFIGSET","crdb":{},"dependencies":{"gears_python":{"sha256":"5206dfc7199e66c6cfe7a9443c5705e72ceccaccc02d229607e844337e00ce7f","url":"http://redismodules.s3.amazonaws.com/redisgears/redisgears-python.Linux-ubuntu18.04-x86_64.1.2.6.tgz"}},"description":"Dynamic execution framework for your Redis data","display_name":"RedisGears","email":"meir@redislabs.com","homepage":"http://redisgears.io","is_bundled":false,"license":"Redis Source Available License Agreement","min_redis_pack_version":"6.0.12","min_redis_version":"6.0.0","module_name":"rg","semantic_version":"1.2.6","sha256":"ca9c81c7c0e523a5ea5cf41c95ea53abcd6b90094be2f0901814dd5fdbc135d6","uid":"d97a561c5e94e78d60c5b2dfa48a427a","version":10206}
+```
+         
 Install RDI CLI container:
 ```bash
 kubectl config set-context --current --namespace=default
@@ -83,7 +89,24 @@ Redis Enterprise Cluster Password: grab password from $REC_PWD
 Everything else take the default valuest
 Password for the new RDI Database: redis 
 ```
-          
+On success, you should see similar output like below:
+```
+Creating new RDI database:
+ name: redis-di-1
+ port: 12001
+ memory: 100MB
+ shards: 1
+ replication: False
+New instance created on port 12001:
+ DNS: redis-12001.rec.redis.svc.cluster.local
+ ADDR: 10.96.2.9
+INFO - Trying to establish connection to redis-12001.rec.redis.svc.cluster.local on port 12001
+INFO - Trying to establish connection to 10.96.2.9 on port 12001
+Setting up RDI Engine on port 12001
+Successfully configured RDI database on port 12001
+Default Context created successfully
+```
+              
 Edit config.yaml:    
 Update the value of the following fields in the `connections:target:` section:    
 ```
