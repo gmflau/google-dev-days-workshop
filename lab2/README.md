@@ -23,8 +23,8 @@ export REDIS_CLIENT_HOST_IP="$(gcloud compute addresses describe redis-client-ho
 ```    
 
 On success, you should see the newly created reserved public IP addresses as shown below:
-
-    
+![Reserved IPs](./img/reserved_ips.png)   
+     
 Create a GKE cluster:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
@@ -138,7 +138,7 @@ gcloud sql instances create $POSTGRESQL_INSTANCE \
 ```
 On success, you can see your CloudSQL PostgreSQL database in Google Cloud console like the following:
 ![Cloud SQL](./img/CloudSQL.png)
-Capture `the Public IP address` for later use in the lab.
+Capture the `Public IP address` for later use in the lab.
             
 Create two sql batch files:
 ```bash
