@@ -138,7 +138,10 @@ gcloud sql instances create $POSTGRESQL_INSTANCE \
 ```
 On success, you can see your CloudSQL PostgreSQL database in Google Cloud console like the following:
 ![Cloud SQL](./img/CloudSQL.png)
-Capture the `Public IP address` for later use in the lab.
+Capture the `Public IP address` for later use in the lab in an environment variable:
+```bash
+export POSTGRESQL_INSTANCE_IP=$(gcloud sql instances describe $POSTGRESQL_INSTANCE | yq eval '.ipAddresses[] | select(.type == "PRIMARY") | .ipAddress')
+```
             
 Create two sql batch files:
 ```bash
@@ -167,7 +170,7 @@ By default, PostgreSQL database superuser (postgres) does not have permission to
 ```
 gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < alter_postgres_replication.sql
 ```
-When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return
+When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return    
 Run the following command to populate test data:
 ```
 gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql

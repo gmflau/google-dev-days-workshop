@@ -14,4 +14,13 @@ For example,
 export REDIS_URI=redis://default:xnurcS28JREs9S8HHemx2cKc1jLFi3ua@redis-10996.c279.us-central1-1.gce.cloud.redislabs.com:10996
 export REDIS_INSIGHT_PORT=10996
 ```
+Capture the following Redis Enterprise database connection information in environment variables as follows:
+![SM DB Host/Port](./img/REDB_connection_string.png)
+![SM DB password](./img/REDB_password.png)
+```
+export REDIS_TARGET_DB_HOST=<Redis Target db endpoint>
+export REDIS_TARGET_DB_PORT=<Redis Target db endpoint port>
+export REDIS_TARGET_DB_PASSWORD=<Redis Target db password>
+```
+
 
