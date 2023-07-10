@@ -75,11 +75,13 @@ Create a new RDI database:
 kubectl exec -it -n default pod/redis-di-cli -- redis-di create --cluster-host localhost 
 ```
     
-Use the following input and answer the rest of the promot:
+Use the following input and answer the rest of the prompt:
 ```bash
-rec.redis.svc.cluster.local
-demo@redis.com
-Grab password from $REC_PWD
+Host/IP of Redis Enterprise Cluster: rec.redis.svc.cluster.local
+Redis Enterprise Cluster username: demo@redis.com
+Redis Enterprise Cluster Password: grab password from $REC_PWD
+Everything else take the default valuest
+Password for the new RDI Database: redis 
 ```
           
 Edit config.yaml:    
@@ -185,22 +187,64 @@ Check if the job has been created:
 ```bash
 kubectl exec -it -n default pod/redis-di-cli -- redis-di list-jobs
 ```
-    
-Update an existing job:
-After editing the ./emp.yaml file, then run:
-```bash
-kubectl delete configmap redis-di-jobs 
-kubectl create configmap redis-di-jobs --from-file=./emp.yaml
+When prompted (RDI Database Password []:), enter `redis` then hit return
+You should see a similar output like below:
 ```
-    
-Deploy the job through an updated ConfigMap:
-```bash
-kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
+Ingest Jobs
++------+---------------+----------+--------+-------+-----------------+--------+-----+
+| Name | Server        | DB       | Schema | Table | Transformations | Filter | Key |
++------+---------------+----------+--------+-------+-----------------+--------+-----+
+| emp  | 35.222.41.246 | postgres |        | emp   | Yes             | No     | Yes |
++------+---------------+----------+--------+-------+-----------------+--------+-----+
 ```
-    
-Review the updated job detail in RDI:
+        
+Verify the job status in RDI:
 ```bash
-kubectl exec -n default -it pod/redis-di-cli -- redis-di describe-job emp
+kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 ```
+When prompted (RDI Database Password []:), enter `redis` then hit return    
+You should see a similar output like below:         
+```
+Status of Redis Data Integration version 0.101.3 on 10.96.1.6:12001
 
+started
 
+Engine State
+Sync mode: cdc
+Last data retrieved (source): 07/10/2023 06:28:38.000000 
+Last data updated (target): 07/10/2023 06:28:38.640780 
+Last snapshot:
+  Number of processes: 4
+  Start: 07/10/2023 06:03:29.564514 
+  End: still running
+
+Connections
++--------+-------+--------------------------------------------------------+-------+----------+---------+----------+-----------+
+| Name   | Type  | Host(s)                                                | Port  | Database | User    | Password | Status    |
++--------+-------+--------------------------------------------------------+-------+----------+---------+----------+-----------+
+| target | redis | redis-10996.c279.us-central1-1.gce.cloud.redislabs.com | 10996 |          | default | ******   | connected |
++--------+-------+--------------------------------------------------------+-------+----------+---------+----------+-----------+
+
+Clients
++------------+-----------------+---------------------+-----------+------------+---------+
+| ID         | ADDR            | Name                | Age (sec) | Idle (sec) | User    |
++------------+-----------------+---------------------+-----------+------------+---------+
+| 4121001001 | 10.96.1.7:53802 | redis-di-cli        | 0         | 0          | default |
+| 870001002  | 10.96.1.8:37510 | debezium:redis:sink | 1649      | 138        | default |
+| 873001002  | 10.96.1.8:37540 | debezium:offsets    | 1648      | 138        | default |
++------------+-----------------+---------------------+-----------+------------+---------+
+
+Ingested Data Streams
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| Name                          | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| data:35.222.41.246.public.emp | 7     | 0       | 7        | 0       | 0       | 0        | 0        |
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
+
+Offsets
+ ["redis",{"server":"35.222.41.246"}]: {"transaction_id":null,"lsn_proc":28269984,"messageType":"INSERT","lsn_commit":28232904,"lsn":28269984,"txId":1368,"ts_usec":1688970517998472}
+
+Performance Statistics per Batch (batch size: 2000)
+  Last run(s) duration (ms): [3]
+  Average run duration (ms): 111.00
+```
