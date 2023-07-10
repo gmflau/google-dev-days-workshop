@@ -248,3 +248,8 @@ Performance Statistics per Batch (batch size: 2000)
   Last run(s) duration (ms): [3]
   Average run duration (ms): 111.00
 ```
+    
+Now, the RDI Ingest with CloudSQL PostgreSQL as `source` and fully managed Redis Enterprise database as `target` for order information.
+     
+ 
+
