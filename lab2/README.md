@@ -140,7 +140,7 @@ On success, you can see your CloudSQL PostgreSQL database in Google Cloud consol
 ![Cloud SQL](./img/CloudSQL.png)
 Capture the `Public IP address` for later use in the lab in an environment variable:
 ```bash
-export POSTGRESQL_INSTANCE_IP=$(gcloud sql instances describe $POSTGRESQL_INSTANCE | yq eval '.ipAddresses[] | select(.type == "PRIMARY") | .ipAddress')
+export POSTGRESQL_INSTANCE_IP=$(gcloud sql instances describe $POSTGRESQL_INSTANCE --format=json | jq -r '.ipAddresses[] | select(.type == "PRIMARY") | .ipAddress')
 ```
             
 Create two sql batch files:
