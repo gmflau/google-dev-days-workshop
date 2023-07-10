@@ -24,8 +24,8 @@ EOF
 
 kubectl apply -f rec.yaml -n redis 
 ```
-    
-Retrieve the password for the Redis Enterprise Cluster's default uesr: demo@redislabs.com:
+It will take between 6 and 8 minutes to complete.        
+Then, retrieve the password for the Redis Enterprise Cluster's default uesr: demo@redis.com:
 ```bash
 export REC_PWD=$(kubectl get secrets -n redis rec -o jsonpath="{.data.password}" | base64 --decode)
 ```
@@ -34,7 +34,7 @@ Install Redis Gears:
 ```bash
 kubectl exec -it rec-0 -n redis -- curl -s https://redismodules.s3.amazonaws.com/redisgears/redisgears_python.Linux-ubuntu18.04-x86_64.1.2.6.zip -o /tmp/redis-gears.zip
 
-kubectl exec -it rec-0 -n redis -- curl -k -s -u "demo@redislabs.com:${REC_PWD}" -F "module=@/tmp/redis-gears.zip" https://localhost:9443/v2/modules
+kubectl exec -it rec-0 -n redis -- curl -k -s -u "demo@redis.com:${REC_PWD}" -F "module=@/tmp/redis-gears.zip" https://localhost:9443/v2/modules
 ```
     
 Install RDI CLI container:
@@ -78,13 +78,17 @@ kubectl exec -it -n default pod/redis-di-cli -- redis-di create --cluster-host l
 Use the following input and answer the rest of the promot:
 ```bash
 rec.redis.svc.cluster.local
-demo@redislabs.com
+demo@redis.com
 Grab password from $REC_PWD
 ```
-    
-Create a RDI config file:
-```bash
-kubectl exec -n default -it pod/redis-di-cli -- redis-di scaffold --db-type postgresql --preview config.yaml > config.yaml
+          
+Edit config.yaml:    
+Update the value of the following fields in the `connections:target:` section:    
+```
+host: <Redis Enterprise database host in Lab 3>
+port: <Redis Enterprise database port in Lab 3>
+user: default
+password: <Redis Enterprise database user in Lab3>
 ```
     
 Create a ConfigMap for Redis Data Integration:
@@ -92,19 +96,23 @@ Create a ConfigMap for Redis Data Integration:
 kubectl create configmap redis-di-config --from-file=config.yaml -n default
 ```
     
-Deploy the RDI configuration:
+Deploy the RDI configuration:   
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
 ```
-     
-Install the Debezium Server:
-```bash
-kubectl exec -n default -it pod/redis-di-cli -- redis-di scaffold --db-type postgresql --preview debezium/application.properties > application.properties
+When prompted for password (RDI Database Password []:), enter `redis` and hit return.
+        
+      
+Edit application.properties:    
+Update the value of the following fields with the CloudSQL PostgreSQL's public IP address:   :
 ```
-
+debezium.source.topic.prefix=
+debezium.source.database.hostname=
+```
+      
 Create a ConfigMap for Debezium Server:
 ```bash
-kubectl exec -n default -it pod/redis-di-cli -- redis-di scaffold --db-type postgresql --preview debezium/application.properties > application.properties
+kubectl create configmap debezium-config --from-file=application.properties -n default
 ```    
     
 Create the Debezium Server Pod:
@@ -144,7 +152,7 @@ Edit emp.yaml:
 ```bash
 cat << 'EOF' > ./emp.yaml
 source:
-  server_name: example-postgres.default.svc.cluster.local
+  server_name: <CloudSQL PostgreSQL's public IP address>
   db: postgres
   table: emp
 transform:
@@ -157,7 +165,7 @@ output:
     with:
       connection: target
       key:
-        expression: concat(['emp:fname:',fname,':lname:',lname])
+        expression: concat(['employee:',user_id]) 
         language: jmespath
 EOF
 ```
@@ -170,7 +178,9 @@ Deploy the RDI job:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
 ```
+When prompted for password (RDI Database Password []:), enter `redis` and hit return   
     
+     
 Check if the job has been created:
 ```bash
 kubectl exec -it -n default pod/redis-di-cli -- redis-di list-jobs
