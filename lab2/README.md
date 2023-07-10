@@ -171,6 +171,7 @@ By default, PostgreSQL database superuser (postgres) does not have permission to
 gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < alter_postgres_replication.sql
 ```
 When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return    
+    
 Run the following command to populate test data:
 ```
 gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql
