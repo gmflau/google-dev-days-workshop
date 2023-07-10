@@ -136,7 +136,10 @@ gcloud sql instances create $POSTGRESQL_INSTANCE \
 --root-password=postgres \
 --database-flags=cloudsql.logical_decoding=on
 ```
-
+On success, you can see your CloudSQL PostgreSQL database in Google Cloud console like the following:
+![Cloud SQL](./img/CloudSQL.png)
+Capture `the Public IP address` for later use in the lab.
+            
 Create two sql batch files:
 ```bash
 cat <<EOF > alter_postgres_replication.sql
