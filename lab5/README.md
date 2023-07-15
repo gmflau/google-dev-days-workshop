@@ -1,8 +1,6 @@
 # Lab 5: Set up Redis Data Integration (RDI)
 
-#### 1. Provision a CloudSQL PostgreSQL instance:
-
-#### 2. Deploy Radis Data Integration:
+#### Deploy Radis Data Integration:
 Deploy a Redis Enterprise cluster:
 ```bash
 kubectl create namespace redis
@@ -173,7 +171,7 @@ kubectl apply -f /tmp/debezium-server-pod.yml
 ```
     
 Create a RDI job:    
-Edit emp.yaml:
+Create emp.yaml:
 ```bash
 cat << 'EOF' > ./emp.yaml
 source:
@@ -275,4 +273,38 @@ Performance Statistics per Batch (batch size: 2000)
 Now, the RDI Ingest with CloudSQL PostgreSQL as `source` and fully managed Redis Enterprise database as `target` for order information has been set up properly.
      
  
+#### Create a transformation job for the demo application's orders
+Create a RDI job:
+Create order.yaml:
+```bash
+cat << 'EOF' > ./order.yaml
+source:
+  server_name: <CloudSQL PostgreSQL's public IP address>
+  db: postgres
+  table: emp
+transform:
+  - uses: rename_field
+    with:
+      from_field: fname
+      to_field: first_name
+output:
+  - uses: redis.write
+    with:
+      connection: target
+      key:
+        expression: concat(['employee:',user_id])
+        language: jmespath
+EOF
+```
+Create a ConfigMap for the job:
+```bash
+kubectl create configmap redis-di-jobs --from-file=./emp.yaml
+```
+
+Deploy the RDI job:
+```bash
+kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
+```
+When prompted for password (RDI Database Password []:), enter `redis` and hit return
+
 
